@@ -1,0 +1,137 @@
+﻿<Window x:Class="ChildPlaygroundTracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Детская площадка" Height="600" Width="800" MinHeight="600" MinWidth="800" Icon="/Images/icon.ico">
+    <Grid Background="#F5DEB3">
+        <TabControl>
+            <TabItem Header="Активные">
+                <StackPanel>
+                    <DataGrid x:Name="ActiveVisitsGrid" AutoGenerateColumns="False" Margin="5" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserSortColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Ребенок"  Binding="{Binding Child.FirstName}" Width="*"/>
+                            <DataGridTextColumn Header="Родитель" Binding="{Binding Child.Parent.FirstName}" Width="120"/>
+                            <DataGridTextColumn Header="Телефон родителя" Binding="{Binding Child.Parent.Phone}" Width="120"/>
+                            <DataGridTextColumn Header="Начало" Binding="{Binding StartTime, StringFormat=HH:mm}" Width="100"/>
+                            <DataGridTextColumn Header="Продолжительность" Binding="{Binding Duration}" Width="120"/>
+                            <DataGridTemplateColumn Width="100">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Стоп" Click="StopVisit_Click" 
+                                                Background="#F0E68C" Margin="2" Padding="5"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Новый визит">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <GroupBox Header="Новый ребенок" Background="#F0E68C" Grid.Row="0">
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <!-- 0: ФИО родителя (Label) -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- 1: TextBox для ФИО родителя -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- 2: Телефон родителя (Label) -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- 3: TextBox для телефона -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- 4: ФИО ребенка (Label) -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- 5: TextBox для ФИО ребенка -->
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <!-- 6: Кнопка "Добавить" -->
+                            </Grid.RowDefinitions>
+
+                            <!-- ФИО родителя -->
+                            <Label Content="Фамилия родителя:" Grid.Row="0"/>
+                            <TextBox x:Name="ParentLastName" Grid.Row="1"/>
+
+                            <Label Content="Имя родителя:" Grid.Row="2"/>
+                            <TextBox x:Name="ParentFirstName" Grid.Row="3"/>
+
+                            <Label Content="Отчество родителя:" Grid.Row="4"/>
+                            <TextBox x:Name="ParentPatronymic" Grid.Row="5"/>
+
+                            <Label Content="Фамилия ребенка:" Grid.Row="6"/>
+                            <TextBox x:Name="ChildLastName" Grid.Row="7"/>
+
+                            <Label Content="Имя ребенка:" Grid.Row="8"/>
+                            <TextBox x:Name="ChildFirstName" Grid.Row="9"/>
+
+                            <Label Content="Отчество ребенка:" Grid.Row="10"/>
+                            <TextBox x:Name="ChildPatronymic" Grid.Row="11"/>
+
+                            <Label Content="Номер телефона Родителя" Grid.Row="12"/>
+                            <TextBox x:Name="ParentPhone" Grid.Row="13"/>
+
+                            <!-- Кнопка "Добавить" -->
+                            <Button Content="Добавить" Click="AddChild_Click" 
+                Grid.Row="14" Background="#F5DEB3" Margin="0,5" Padding="10,3"/>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="Начать посещение" Background="#F0E68C" Grid.Row="1" Margin="0,10">
+                        <StackPanel Margin="5">
+                            <Label Content="Выберите ребенка:" HorizontalAlignment="Left"/>
+                            <ComboBox x:Name="ChildrenCombo" DisplayMemberPath="FullName" Margin="0,5" MinWidth="200"/>
+                            <Button Content="Старт" Click="StartVisit_Click" 
+                                    Background="#F5DEB3" Margin="0,5" Padding="10,3"/>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Отчеты">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                        <Label Content="С:" VerticalAlignment="Center"/>
+                        <DatePicker x:Name="StartDate" Margin="5,0" Width="120"/>
+                        <Label Content="По:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                        <DatePicker x:Name="EndDate" Margin="5,0" Width="120"/>
+                        <Button Content="Показать" Click="GenerateReport_Click" 
+                                Background="#F0E68C" Margin="10,0" Padding="10,3"/>
+                    </StackPanel>
+
+                    <DataGrid x:Name="ReportGrid" AutoGenerateColumns="False" Grid.Row="1" IsReadOnly="True" CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          CanUserReorderColumns="False"
+          CanUserSortColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Ребенок" Binding="{Binding Child.FirstName}" Width="*"/>
+                            <DataGridTextColumn Header="Родитель" Binding="{Binding Child.Parent.FirstName}" Width="120"/>
+                            <DataGridTextColumn Header="Телефон родителя" Binding="{Binding Child.Parent.Phone}" Width="120"/>
+                            <DataGridTextColumn Header="Дата" Binding="{Binding StartTime, StringFormat=d}" Width="100"/>
+                            <DataGridTextColumn Header="Начало" Binding="{Binding StartTime, StringFormat=t}" Width="100"/>
+                            <DataGridTextColumn Header="Конец" Binding="{Binding EndTime, StringFormat=t}" Width="100"/>
+                            <DataGridTextColumn Header="Продолжительность" Binding="{Binding Duration}" Width="120"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
