@@ -124,6 +124,11 @@
     <None Include="Отчеты ЛР3\Лр3 Фатеева.docx" />
     <None Include="Отчеты ЛР3\Лр3 Черепанов.docx" />
     <None Include="Отчеты ЛР3\Лр3 Чернов.docx" />
+    <None Include="Отчеты ЛР4\ЛР4 Прусакова.docx" />
+    <None Include="Отчеты ЛР4\Лр4 Рубцов.docx" />
+    <None Include="Отчеты ЛР4\ЛР4 Фатеева.docx" />
+    <None Include="Отчеты ЛР4\ЛР4 Черепанов.docx" />
+    <None Include="Отчеты ЛР4\ЛР4 Чернов.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
