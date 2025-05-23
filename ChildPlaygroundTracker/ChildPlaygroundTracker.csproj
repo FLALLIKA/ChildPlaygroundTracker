@@ -119,6 +119,11 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="README.md" />
+    <None Include="Отчеты ЛР3\Лр3 Прусакова .docx" />
+    <None Include="Отчеты ЛР3\Лр3 Рубцов.docx" />
+    <None Include="Отчеты ЛР3\Лр3 Фатеева.docx" />
+    <None Include="Отчеты ЛР3\Лр3 Черепанов.docx" />
+    <None Include="Отчеты ЛР3\Лр3 Чернов.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -127,6 +132,7 @@
     <Resource Include="Images\Collaborators.png" />
     <Resource Include="Images\icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
